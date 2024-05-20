@@ -4,6 +4,7 @@
 package org.sofka.api.cuenta.bancaria.cuenta.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -168,12 +169,12 @@ public class CuentaServiceImpl implements CuentaService {
             }
         } catch (CuentaException e) {
             throw new CuentaException(e);
-        } catch (JsonMappingException e) {
+        } catch (JsonMappingException e ) {
             throw new RuntimeException(e);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return new ArrayList<>();
     }
 
         /**
