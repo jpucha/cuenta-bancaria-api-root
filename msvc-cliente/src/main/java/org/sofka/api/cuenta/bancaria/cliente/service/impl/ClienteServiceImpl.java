@@ -104,10 +104,11 @@ public class ClienteServiceImpl implements ClienteService {
         try {
             Optional<Cliente> clienteEncontrado = clienteRepository.obtenerPorIdentificacion(
                 identificacion);
-            if (clienteEncontrado.isPresent()) {
-                clienteRepository.deleteById(clienteEncontrado.get().getClienteId());
+            if (!clienteEncontrado.isPresent()) {
+                throw new ClienteException("No se puede eliminar, cliente no encontrado");
             }
-            throw new ClienteException("No se puede eliminar, cliente no encontrado");
+            clienteRepository.deleteById(clienteEncontrado.get().getClienteId());
+
         } catch (ClienteException e) {
             throw new ClienteException(e);
         }

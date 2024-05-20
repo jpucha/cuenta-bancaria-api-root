@@ -110,7 +110,7 @@ public class CuentaController {
                 return ValidaWsUtil.validar(resultado);
             }
             return ResponseEntity.status(HttpStatus.CREATED)
-                .body(BaseResponseDto.builder().data(service.create(cuentaEntradaDto)).build());
+                .body(BaseResponseDto.builder().data(service.update(cuentaEntradaDto)).build());
         } catch (Exception e) {
             log.error(ERROR_MN, e.getCause().getMessage());
             return ResponseEntity.internalServerError()
