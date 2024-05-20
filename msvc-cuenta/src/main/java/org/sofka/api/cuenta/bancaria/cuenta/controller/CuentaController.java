@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *     <p>
- *     [$Author: Jenny Pucha $, $Date: 20 abr. 2024 $]
+ *     [$Author: Jenny Pucha $, $Date: 19 may. 2024 $]
  *     </p>
  */
 @RestController
@@ -46,7 +46,7 @@ public class CuentaController {
     /**
      * <b> Metodo que crea cuentas. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @param cuentaEntradaDto parametro de entrada
@@ -72,7 +72,7 @@ public class CuentaController {
     /**
      * <b> Metodo para obtener las cuentas de un cliente por su identificacion. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @param identificacion parametro de entrada
@@ -95,7 +95,7 @@ public class CuentaController {
     /**
      * <b> Metodo que actualiza la cuenta. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @param cuentaEntradaDto parametro de entrada
@@ -121,7 +121,7 @@ public class CuentaController {
     /**
      * <b> Metodo que elimina un registro por su id. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @param id parametro de entrada

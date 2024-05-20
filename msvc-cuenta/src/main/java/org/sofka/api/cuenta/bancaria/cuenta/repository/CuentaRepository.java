@@ -17,7 +17,7 @@ import org.sofka.api.cuenta.bancaria.cuenta.model.entity.Cuenta;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *          <p>
- *          [$Author: Jenny Pucha $, $Date: 20 abr. 2024 $]
+ *          [$Author: Jenny Pucha $, $Date: 19 may. 2024 $]
  *          </p>
  */
 public interface CuentaRepository extends JpaRepository<Cuenta, Long> {

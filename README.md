@@ -7,8 +7,8 @@ Además contiene el wrapper de maven en su version 3.8.6, asi pues puede constru
 mvn clean install en windows.
 
 Primeros pasos
-Clonar el proyecto cuenta-bancaria-root.
-Ejecutar mvn clean install en windows,.
+Clonar el proyecto cuenta-bancaria-api-root.
+Ejecutar mvn clean install en windows.
 Para ejecutar:
 1. `java -jar msvc-cliente-0.0.1-SNAPSHOT.jar.jar`
 2. `java -jar -Dspring.profiles.active=CONSOLA msvc-cliente-0.0.1-SNAPSHOT.jar`  (En este caso spring boot el profile CONSOLA)
@@ -17,6 +17,8 @@ Para ejecutar:
 
 
 Para Desplegar mediante docker
+Clonar el proyecto cuenta-bancaria-api-root.
+Ejecutar mvn clean install -DskipTests en windows
 Situarse en la carpeta donde se encuentra el archivo docker-compose.yml
 Abrir una terminal y ejecutar el siguiente comando docker-compose up -d
 Cuando haya terminado de levantar los contenedores postgres13, msvc-cliente, msvc-cuenta

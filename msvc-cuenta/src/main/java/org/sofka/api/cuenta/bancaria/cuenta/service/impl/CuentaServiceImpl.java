@@ -7,6 +7,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.sofka.api.cuenta.bancaria.cliente.controller.dto.salida.BaseResponseDto;
 import org.sofka.api.cuenta.bancaria.cuenta.clients.ClienteClientRest;
 import org.sofka.api.cuenta.bancaria.cuenta.controller.dto.entrada.CuentaEntradaDto;
 import org.sofka.api.cuenta.bancaria.cuenta.enumeration.EstadoEmun;
@@ -16,6 +20,8 @@ import org.sofka.api.cuenta.bancaria.cuenta.model.entity.Cuenta;
 import org.sofka.api.cuenta.bancaria.cuenta.repository.CuentaRepository;
 import org.sofka.api.cuenta.bancaria.cuenta.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -25,7 +31,7 @@ import org.springframework.util.ObjectUtils;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *     <p>
- *     [$Author: Jenny Pucha $, $Date: 20 abr. 2024 $]
+ *     [$Author: Jenny Pucha $, $Date: 19 may. 2024 $]
  *     </p>
  */
 @Service
@@ -37,6 +43,9 @@ public class CuentaServiceImpl implements CuentaService {
     @Autowired
     private ClienteClientRest clienteRest;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     /**
      * {@inheritDoc}
      */
@@ -44,25 +53,40 @@ public class CuentaServiceImpl implements CuentaService {
     @Override
     public Cuenta create(CuentaEntradaDto cuentaEntradaDto) throws CuentaException {
         try {
-            Optional<ClienteModel> clienteEncontrado = clienteRest.obtenerClientePorIdentificacion(
+            ResponseEntity<BaseResponseDto> response = clienteRest.obtenerClientePorIdentificacion(
                 cuentaEntradaDto.getIdentificacion());
-            if (clienteEncontrado.isPresent()) {
-                if (EstadoEmun.INACTIVO.getDescripcion()
-                    .equals(clienteEncontrado.get().getEstado())) {
-                    throw new CuentaException("El cliente encontrado con estado inactivo.");
-                }
-            } else {
-                Cuenta cuenta = Cuenta.builder()
-                    .estado(EstadoEmun.ACTIVO.getDescripcion())
-                    .numeroCuenta(cuentaEntradaDto.getNumeroCuenta())
-                    .saldoInicial(BigDecimal.valueOf(cuentaEntradaDto.getSaldoInicial()))
-                    .tipoCuenta(cuentaEntradaDto.getTipoCuenta())
-                    .idCliente(clienteEncontrado.get().getClienteId()).build();
-                return cuentaRepository.save(cuenta);
 
+            if (response.getStatusCode() == HttpStatus.OK) {
+                if (!ObjectUtils.isEmpty(response.getBody())) {
+                    BaseResponseDto baseResponseDto = response.getBody();
+                    String jsonString = objectMapper.writeValueAsString(baseResponseDto.getData());
+                    ClienteModel clienteEncontrado = objectMapper.readValue(jsonString,
+                        ClienteModel.class);
+                    if (ObjectUtils.isEmpty(clienteEncontrado)) {
+                        throw new CuentaException(
+                            "Cliente no encontrado, primero debe ser creado.");
+                    }
+
+                    //validar si existe el cliente, si existe solo ahí debe crear la cuenta
+                    if (!ObjectUtils.isEmpty(clienteEncontrado)) {
+                        if (EstadoEmun.INACTIVO.getDescripcion()
+                            .equals(clienteEncontrado.getEstado())) {
+                            throw new CuentaException("Cliente encontrado con estado inactivo.");
+                        }
+                        Cuenta cuenta = Cuenta.builder()
+                            .estado(EstadoEmun.ACTIVO.getDescripcion())
+                            .numeroCuenta(cuentaEntradaDto.getNumeroCuenta())
+                            .saldoInicial(BigDecimal.valueOf(cuentaEntradaDto.getSaldoInicial()))
+                            .tipoCuenta(cuentaEntradaDto.getTipoCuenta())
+                            .idCliente(clienteEncontrado.getClienteId()).build();
+                        return cuentaRepository.save(cuenta);
+                    }
+                }
             }
         } catch (CuentaException e) {
             throw new CuentaException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -85,7 +109,7 @@ public class CuentaServiceImpl implements CuentaService {
             cuentaActualizar.setTipoCuenta(cuentaEntradaDto.getTipoCuenta());
             cuentaActualizar
                 .setSaldoInicial(
-                    BigDecimal.valueOf(Double.valueOf(cuentaEntradaDto.getSaldoInicial())));
+                    BigDecimal.valueOf(cuentaEntradaDto.getSaldoInicial()));
             cuentaActualizar.setEstado(cuentaEntradaDto.getEstado());
             return cuentaRepository.save(cuentaActualizar);
         } catch (CuentaException e) {
@@ -117,40 +141,46 @@ public class CuentaServiceImpl implements CuentaService {
     @Override
     public List<Cuenta> obtenerCuentasPorCliente(String identificacion) throws CuentaException {
         try {
-            Optional<ClienteModel> clienteEncontrado = clienteRest.obtenerClientePorIdentificacion(
+            ResponseEntity<BaseResponseDto> response = clienteRest.obtenerClientePorIdentificacion(
                 identificacion);
 
-            if (!clienteEncontrado.isPresent()) {
-                throw new CuentaException("No existe el cliente, favor registrarlo primero.");
-            }
-            List<Cuenta> listaCuenta = cuentaRepository.findByIdCliente(
-                clienteEncontrado.get().getClienteId());
-            if (ObjectUtils.isEmpty(listaCuenta)) {
-                throw new CuentaException(
-                    "No existe cuenta(s) para el número de identificación ingresado."
-                        + clienteEncontrado.get().getIdentificacion());
-            }
-            return listaCuenta;
+            if (response.getStatusCode() == HttpStatus.OK) {
+                if (!ObjectUtils.isEmpty(response.getBody())) {
+                    BaseResponseDto baseResponseDto = response.getBody();
+                    String jsonString = objectMapper.writeValueAsString(baseResponseDto.getData());
+                    ClienteModel clienteEncontrado = objectMapper.readValue(jsonString,
+                        ClienteModel.class);
 
+                    if (ObjectUtils.isEmpty(clienteEncontrado)) {
+                        throw new CuentaException(
+                            "No existe el cliente, favor registrarlo primero y luego crear la cuenta para obtener información.");
+                    }
+
+                    List<Cuenta> listaCuenta = cuentaRepository.findByIdCliente(
+                        clienteEncontrado.getClienteId());
+                    if (ObjectUtils.isEmpty(listaCuenta)) {
+                        throw new CuentaException(
+                            "No existe cuenta(s) para el número de identificación ingresado."
+                                + clienteEncontrado.getIdentificacion());
+                    }
+                    return listaCuenta;
+                }
+            }
         } catch (CuentaException e) {
             throw new CuentaException(e);
+        } catch (JsonMappingException e) {
+            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Optional<Cuenta> obtenerPorNumeroCuenta ( int numeroCuenta){
+            return cuentaRepository.findByNumeroCuenta(numeroCuenta);
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<Cuenta> obtenerPorNumeroCuenta(int numeroCuenta) {
-        return cuentaRepository.findByNumeroCuenta(numeroCuenta);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<ClienteModel> obtenerClientePorIdentificacion(String id) {
-        return clienteRest.obtenerClientePorIdentificacion(id);
-    }
-
-}

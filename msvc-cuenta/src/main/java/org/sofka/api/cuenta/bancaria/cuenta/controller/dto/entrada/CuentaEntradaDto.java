@@ -21,7 +21,7 @@ import lombok.Setter;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *          <p>
- *          [$Author: Jenny Pucha $, $Date: 20 abr. 2024 $]
+ *          [$Author: Jenny Pucha $, $Date: 19 may. 2024 $]
  *          </p>
  */
 @JsonInclude(Include.NON_EMPTY)
@@ -39,7 +39,7 @@ public class CuentaEntradaDto {
     @NotBlank
     private String tipoCuenta;
 
-    @NotBlank
+    @NotNull
     private double saldoInicial;
 
     private String estado;

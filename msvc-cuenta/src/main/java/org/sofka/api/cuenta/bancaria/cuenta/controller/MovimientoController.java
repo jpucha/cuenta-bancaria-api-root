@@ -51,7 +51,7 @@ public class MovimientoController {
     /**
      * <b> Metodo que crea los movimientos. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @param movimientoEntradaDto parametro de entrada
@@ -76,7 +76,7 @@ public class MovimientoController {
     /**
      * <b> Metodo que obtiene todos los movimientos existentes. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @return ResponseEntity<BaseResponseDto> lista o mensaje de error
@@ -98,7 +98,7 @@ public class MovimientoController {
     /**
      * <b> Metodo que actualiza el movimiento. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @param movimientoEntradaDto parametro de entrada
@@ -123,7 +123,7 @@ public class MovimientoController {
     /**
      * <b> Metodo que elimina un registro por su id. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 20 abr. 2024]
+     * [Author: Jenny Pucha, Date: 19 may. 2024]
      * </p>
      *
      * @param id parametro de entrada

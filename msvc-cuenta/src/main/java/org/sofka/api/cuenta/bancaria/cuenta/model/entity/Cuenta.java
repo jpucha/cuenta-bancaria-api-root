@@ -39,7 +39,7 @@ import org.sofka.api.cuenta.bancaria.cuenta.model.ClienteModel;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *          <p>
- *          [$Author: Jenny Pucha $, $Date: 20 abr. 2024 $]
+ *          [$Author: Jenny Pucha $, $Date: 19 may. 2024 $]
  *          </p>
  */
 @JsonInclude(Include.NON_EMPTY)
@@ -87,9 +87,9 @@ public class Cuenta implements Serializable {
 	@JsonIgnore
 	private ClienteModel cliente;*/
 
-	/* bi-directional many-to-one association to Movimiento
+	// bi-directional many-to-one association to Movimiento
 	@OneToMany(mappedBy = "cuenta")
 	@JsonIgnore
-	private List<Movimiento> movimientos;*/
+	private List<Movimiento> movimientos;
 
 }

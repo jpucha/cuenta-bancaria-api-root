@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>org.sofka.api.cuenta.bancaria</groupId>
-    <artifactId>cuenta-bancaria-root</artifactId>
+    <artifactId>cuenta-bancaria-api-root</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
