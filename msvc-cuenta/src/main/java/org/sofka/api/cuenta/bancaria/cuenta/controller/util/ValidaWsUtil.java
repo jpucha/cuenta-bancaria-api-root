@@ -11,7 +11,7 @@ public class ValidaWsUtil {
     /**
      * <b> Metodo para tratar los errores de validaciones de los datos de entrada. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param resultado parametro de entrada

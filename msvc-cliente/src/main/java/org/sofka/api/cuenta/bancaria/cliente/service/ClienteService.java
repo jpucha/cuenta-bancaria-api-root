@@ -16,7 +16,7 @@ import org.sofka.api.cuenta.bancaria.cliente.model.entity.Cliente;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *          <p>
- *          [$Author: Jenny Pucha $, $Date: 19 abr. 2024 $]
+ *          [$Author: Jenny Pucha $, $Date: 18 may. 2024 $]
  *          </p>
  */
 public interface ClienteService {
@@ -24,7 +24,7 @@ public interface ClienteService {
     /**
      * <b> Metodo que crea un cliente. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param clienteEntradaDto parametro de entrada
@@ -36,7 +36,7 @@ public interface ClienteService {
     /**
      * <b> Metodo para obtiene todos los clientes </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @return List<Cliente> lista o mensaje de error
@@ -46,7 +46,7 @@ public interface ClienteService {
     /**
      * <b> Metodo que actualiza un cliente. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param clienteEntradaDto parametro de entrada
@@ -58,7 +58,7 @@ public interface ClienteService {
     /**
      * <b> Metodo que elimina un registro por su id. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param identificacion parametro de entrada.
@@ -69,7 +69,7 @@ public interface ClienteService {
     /**
      * <b> Metodo para obtiene un cliente por su identificacion. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param identificacion parametro de entrada.

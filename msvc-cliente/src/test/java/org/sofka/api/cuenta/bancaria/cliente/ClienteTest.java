@@ -3,17 +3,19 @@ package org.sofka.api.cuenta.bancaria.cliente;
 import static org.mockito.Mockito.when;
 import java.util.Optional;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.sofka.api.cuenta.bancaria.cliente.exception.ClienteException;
 import org.sofka.api.cuenta.bancaria.cliente.model.entity.Cliente;
 import org.sofka.api.cuenta.bancaria.cliente.repository.ClienteRepository;
 import org.sofka.api.cuenta.bancaria.cliente.service.impl.ClienteServiceImpl;
 
+@RunWith(MockitoJUnitRunner.class)
 @ExtendWith(MockitoExtension.class)
 public class ClienteTest {
 

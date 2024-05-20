@@ -25,7 +25,7 @@ import org.hibernate.annotations.DynamicUpdate;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *     <p>
- *     [$Author: Jenny Pucha $, $Date: 19 abr. 2024 $]
+ *     [$Author: Jenny Pucha $, $Date: 18 may. 2024 $]
  *     </p>
  */
 @DynamicUpdate
@@ -41,11 +41,12 @@ public class Cliente extends Persona implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Builder
-    public Cliente(String direccion, int edad, String genero, String identificacion, String nombre,
+    public Cliente(Long clienteId, String direccion, int edad, String genero, String identificacion, String nombre,
         String telefono, String contrasena, String estado) {
         super(direccion, edad, genero, identificacion, nombre, telefono);
         this.contrasena = contrasena;
         this.estado = estado;
+        this.clienteId = clienteId;
     }
 
     @Id

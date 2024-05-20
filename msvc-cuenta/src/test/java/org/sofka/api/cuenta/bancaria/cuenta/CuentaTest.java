@@ -9,11 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.sofka.api.cuenta.bancaria.cuenta.clients.ClienteClientRest;
 import org.sofka.api.cuenta.bancaria.cuenta.model.entity.Cuenta;
 import org.sofka.api.cuenta.bancaria.cuenta.repository.CuentaRepository;
 import org.sofka.api.cuenta.bancaria.cuenta.service.impl.CuentaServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(MockitoExtension.class)
 public class CuentaTest {
@@ -24,11 +22,8 @@ public class CuentaTest {
     @Mock
     private CuentaRepository cuentaRepository;
 
-    @Autowired
-    private ClienteClientRest clienteClientRest;
-
     @Test
-    void whenObtenerCuentaPorNumeroCunetaThenNotNull() {
+    void whenObtenerCuentaPorNumeroCuentaThenNotNull() {
         int datosEntrada = 456789;
 
         Cuenta cuentaEsperada = Cuenta.builder().numeroCuenta(456789).idCuenta(1L).idCliente(1L).

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Jenny Pucha
  * @version $Revision: 1.0 $
  *     <p>
- *     [$Author: Jenny Pucha $, $Date: 21 abr. 2024 $]
+ *     [$Author: Jenny Pucha $, $Date: 19 may. 2024 $]
  *     </p>
  */
 @RestController
@@ -43,7 +43,7 @@ public class ClienteController {
     /**
      * <b> Metodo que crea un cliente. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param clienteEntradaDto parametro de entrada
@@ -69,7 +69,7 @@ public class ClienteController {
     /**
      * <b> Metodo para tratar los errores de validaciones de los datos de entrada. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param resultado parametro de entrada
@@ -89,7 +89,7 @@ public class ClienteController {
     /**
      * <b> Metodo para obtiene un cliente por su identificacion. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param identificacion parametro de entrada
@@ -112,7 +112,7 @@ public class ClienteController {
     /**
      * <b> Metodo para obtiene todos los clientes </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @return ResponseEntity<BaseResponseDto> lista o mensaje de error
@@ -131,7 +131,7 @@ public class ClienteController {
     /**
      * <b> Metodo que actualiza un cliente. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param clienteEntradaDto parametro de entrada
@@ -157,7 +157,7 @@ public class ClienteController {
     /**
      * <b> Metodo que elimina un registro por su id. </b>
      * <p>
-     * [Author: Jenny Pucha, Date: 19 abr. 2024]
+     * [Author: Jenny Pucha, Date: 18 may. 2024]
      * </p>
      *
      * @param identificacion parametro de entrada
